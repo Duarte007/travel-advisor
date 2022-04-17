@@ -1,6 +1,7 @@
 import { Box, Typography, Button, Card, CardMedia, CardContent, CardActions, Chip } from '@material-ui/core'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import PhoneIcon from '@material-ui/icons/Phone'
+import Rating from '@material-ui/lab/Rating'
 
 import useStyles from './style'
 
@@ -24,13 +25,19 @@ const PlaceDetails = ({ place }) => {
                     {place.name}
                 </Typography>
                 <Box display="flex" justifyContent="space-between">
+                    <Rating value={Number(place.rating)} readonly />
+                    <Typography gutterBottom variant="subtitle2">
+                        de {place.num_reviews} avaliações
+                    </Typography>
+                </Box>
+                <Box display="flex" justifyContent="space-between">
                     <Typography variant="subtitle2">Preço</Typography>
                     <Typography gutterBottom variant="subtitle2">
                         {place.price_level}
                     </Typography>
                 </Box>
                 <Box display="flex" justifyContent="space-between">
-                    <Typography variant="subtitle2">Avaliação</Typography>
+                    <Typography variant="subtitle2">Ranking</Typography>
                     <Typography gutterBottom variant="subtitle2">
                         {place.ranking}
                     </Typography>
