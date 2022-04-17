@@ -1,0 +1,38 @@
+;
+[{
+        name: 'Teste',
+        price_level: '$',
+        ranking: 'bla',
+        rating: 4,
+        num_reviews: 500,
+        address: 'Rua teste, 38',
+        phone: '+5531991444574',
+    },
+    {
+        name: 'Teste',
+        price_level: '$',
+        ranking: 'bla',
+        rating: 4,
+        num_reviews: 500,
+        address: 'Rua teste, 38',
+        phone: '+5531991444574',
+    },
+    {
+        name: 'Teste',
+        price_level: '$',
+        ranking: 'bla',
+        rating: 4,
+        num_reviews: 500,
+        address: 'Rua teste, 38',
+        phone: '+5531991444574',
+    },
+    {
+        name: 'Teste',
+        price_level: '$',
+        ranking: 'bla',
+        rating: 4,
+        num_reviews: 500,
+        address: 'Rua teste, 38',
+        phone: '+5531991444574',
+    },
+]

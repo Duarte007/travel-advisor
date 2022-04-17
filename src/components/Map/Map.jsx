@@ -7,7 +7,7 @@ import Rating from '@material-ui/lab/Rating'
 
 let count = 0
 
-const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
+const Map = ({ setCoordinates, setBounds, setChildClicked, coordinates, places }) => {
     const classes = useStyles()
     const isDesktop = useMediaQuery('(min-width:600px)')
 
@@ -27,14 +27,14 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
                     setCoordinates({ lat: e.center.lat, lng: e.center.lng })
                     setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw })
                 }}
-                onChildClick={() => {}}
+                onChildClick={(child) => setChildClicked(child)}
             >
                 {places?.map((place, i) => (
                     <div
                         key={i}
                         className={classes.markerContainer}
-                        lat={Number(place.latitude)}
-                        lng={Number(place.longitude)}
+                        lat={Number(place.latitude || 0)}
+                        lng={Number(place.longitude || 0)}
                     >
                         {!isDesktop ? (
                             <LocationOnOutlinedIcon color="primary" fontSize="large" />

@@ -8,15 +8,14 @@ import Header from './components/Header/Header.jsx'
 import List from './components/List/List.jsx'
 import Map from './components/Map/Map.jsx'
 
-let count = 0
-
 const App = () => {
     const [places, setPlaces] = useState([])
+    const [childClicked, setChildClicked] = useState([])
 
     const [coordinates, setCoordinates] = useState({})
     const [bounds, setBounds] = useState({})
 
-    let timeout
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -25,18 +24,12 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-        if (timeout) clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            console.log('oi')
-            console.log('coordinates', coordinates)
-            console.log('bounds', bounds)
-            console.log('app', ++count)
-            getPlacesData(bounds.sw, bounds.ne).then((data) => {
-                console.log(data)
-                setPlaces(data)
-            })
-        }, 1000)
-    }, [coordinates])
+        setIsLoading(true)
+        getPlacesData(bounds.sw, bounds.ne).then((data) => {
+            setPlaces(data)
+            setIsLoading(false)
+        })
+    }, [bounds, coordinates])
 
     return (
         <>
@@ -44,12 +37,13 @@ const App = () => {
             <Header />
             <Grid container spacing={3} style={{ width: '100%%' }}>
                 <Grid item xs={12} md={4}>
-                    <List places={places} />
+                    <List places={places} childClicked={childClicked} isLoading={isLoading} />
                 </Grid>
                 <Grid item xs={12} md={8}>
                     <Map
                         setCoordinates={setCoordinates}
                         setBounds={setBounds}
+                        setChildClicked={setChildClicked}
                         coordinates={coordinates}
                         places={places}
                     />
