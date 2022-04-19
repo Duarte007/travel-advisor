@@ -16,6 +16,7 @@ const App = () => {
     const [bounds, setBounds] = useState({})
 
     const [isLoading, setIsLoading] = useState(false)
+    const [timeoutDebounce, setTimeoutDebounce] = useState(null)
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -24,11 +25,19 @@ const App = () => {
     }, [])
 
     useEffect(() => {
-        setIsLoading(true)
-        getPlacesData(bounds.sw, bounds.ne).then((data) => {
-            setPlaces(data)
-            setIsLoading(false)
-        })
+        if (timeoutDebounce) {
+            clearTimeout(timeoutDebounce)
+        }
+
+        const timeout = setTimeout(() => {
+            setIsLoading(true)
+            getPlacesData(bounds.sw, bounds.ne).then((data) => {
+                setPlaces(data)
+                setIsLoading(false)
+                setTimeoutDebounce(null)
+            })
+        }, 1300)
+        setTimeoutDebounce(timeout)
     }, [bounds, coordinates])
 
     return (

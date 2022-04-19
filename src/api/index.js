@@ -18,7 +18,6 @@ export const getPlacesData = async(sw, ne) => {
             },
         }
         const response = await axios.get(URL, options)
-
         return response.data.data
     } catch (error) {
         console.log(error)
